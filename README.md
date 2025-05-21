@@ -24,43 +24,38 @@ Program to find the solution of a matrix using Gaussian Elimination.
 Developed by: Tamil Pavalan
 RegisterNumber: 212223110058
 */
-import numpy as np
-import sys
-n=int(input())
-a=np.zeros((n,n+1))
-x=np.zeros(n)
+def gaussian_elimination(input_data):
+    import numpy as np
 
-for i in range(n):
-    for j in range(n+1):
-        a[i][j]=float(input())
+    # Parse the input
+    data = list(map(float, input_data.strip().split()))
+    n = int(data[0])
+    matrix = np.array(data[1:]).reshape((n, n + 1))
 
-for i in range(n):
-    if a[i][j]==0.0:
-        sys.exit('Divide by zero detected!')
-    
-    for j in range(i+1,n):
-        ratio=a[j][i]/a[i][i]
-        
-        for k in range(n+1):
-            a[j][k]=a[j][k]-ratio*a[i][k]
-            
-x[n-1]=a[n-1][n]/a[n-1][n-1]
+    for i in range(n):
+        pivot = matrix[i][i]
+        if pivot == 0:
+            raise ValueError("Zero pivot encountered; partial pivoting needed.")
+        matrix[i] = matrix[i] / pivot
+        for j in range(i + 1, n):
+            factor = matrix[j][i]
+            matrix[j] = matrix[j] - factor * matrix[i]
 
-for i in range(n-2,-1,-1):
-    x[i]=a[i][n]
-    
-    for j in range(i+1,n):
-        x[i]=x[i]-a[i][j]*x[j]
-        
-    x[i]=x[i]/a[i][i]
+    x = np.zeros(n)
+    for i in range(n - 1, -1, -1):
+        x[i] = matrix[i][-1] - sum(matrix[i][j] * x[j] for j in range(i + 1, n))
 
-for i in range(n):
-    print('X%d = %0.2f'%(i,x[i]),end=' ')
+    result = " ".join([f"X{i} = {x[i]:.2f}" for i in range(n)])
+    return result
+
+input_data = "3 1 2 4 18 2 12 -2 9 5 26 5 14"
+print(gaussian_elimination(input_data))
 ```
 
 ## Output:
 
-![image](https://github.com/user-attachments/assets/aafa21f3-fd4f-42fb-91f0-6a522c1d20db)
+![image](https://github.com/user-attachments/assets/c513ad55-262d-47dc-baa0-f9eee81443a8)
+
 
 
 
