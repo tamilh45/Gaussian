@@ -8,14 +8,75 @@ To write a program to find the solution of a matrix using Gaussian Elimination.
 2. Anaconda – Python 3.7 Installation / Moodle-Code Runner
 
 ## Algorithm
-### Step1 :
-Input the number of unknowns n and the augmented matrix elements (coefficients + constants).
-### Step 2:
-Apply Forward Elimination: eliminate variables step-by-step to create an upper triangular matrix.
-### Step 3:
-Apply Back Substitution: solve for variables starting from the last equation upwards.
-### Step 4:
-Display the solutions for each variable.
+
+Step 1: Input the Data
+
+Read a single line of space-separated values from input_data.
+
+The first number n represents the number of variables (size of the system).
+
+The remaining n*(n+1) values represent the augmented matrix of the system (A|b), which includes coefficients of the equations and the constants.
+
+Step 2: Reshape Input
+
+Convert the flat list of numbers into an n x (n+1) matrix (augmented matrix).
+
+Step 3: Forward Elimination (Make Upper Triangular Matrix)
+
+For each row i from 0 to n-1:
+
+Check for zero pivot: If the pivot element matrix[i][i] is 0, raise an error (partial pivoting not implemented).
+
+Normalize pivot row: Divide the entire row i by the pivot element.
+
+Eliminate below: For each row j > i, eliminate the i-th coefficient by subtracting an appropriate multiple of the i-th row from the j-th row.
+
+Step 4: Back Substitution
+
+Initialize solution vector x of size n with zeros.
+
+For each row i from n-1 to 0 (bottom to top):
+
+Calculate:
+
+x
+[
+i
+]
+=
+RHS value
+−
+∑
+j
+=
+i
++
+1
+n
+−
+1
+(
+coefficient
+×
+x
+[
+j
+]
+)
+x[i]=RHS value− 
+j=i+1
+∑
+n−1
+​
+ (coefficient×x[j])
+Step 5: Format Output
+
+Format the solution x into strings like X0 = val, X1 = val, ..., rounded to two decimal places.
+
+Step 6: Return the Result
+
+
+
 
 ## Program:
 ```
