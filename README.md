@@ -39,36 +39,8 @@ For each row i from n-1 to 0 (bottom to top):
 
 Calculate:
 
-x
-[
-i
-]
-=
-RHS value
-−
-∑
-j
-=
-i
-+
-1
-n
-−
-1
-(
-coefficient
-×
-x
-[
-j
-]
-)
-x[i]=RHS value− 
-j=i+1
-∑
-n−1
-​
- (coefficient×x[j])
+x[i]=RHS value− j=i+1∑n−1(coefficient×x[j])
+
 Step 5: Format Output
 
 Format the solution x into strings like X0 = val, X1 = val, ..., rounded to two decimal places.
